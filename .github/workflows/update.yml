@@ -10,20 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
       - name: Fetch M3U playlist
         run: |
           curl -fsSL -o playlist.m3u "https://servertvhub.site/jiotv+/playlist.php" || wget -q -O playlist.m3u "https://servertvhub.site/jiotv+/playlist.php"
-        
       - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
       - name: Check for changes
         id: check_changes
         run: |
@@ -32,7 +28,6 @@ jobs:
           else
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
-          
       - name: Commit and push changes
         if: steps.check_changes.outputs.changed == 'true'
         run: |
