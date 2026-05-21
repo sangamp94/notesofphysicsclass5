@@ -2,10 +2,8 @@ name: Update M3U Playlist
 
 on:
   schedule:
-    # Runs every 6 hours
     - cron: '0 */6 * * *'
   workflow_dispatch:
-    # Allow manual trigger from Actions tab
 
 jobs:
   update-playlist:
