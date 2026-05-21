@@ -1,16 +1,43 @@
-# Clone your repo
-git clone https://github.com/sangamp94/notesofphysicsclass5.git
-cd notesofphysicsclass5
+name: Update M3U Playlist
 
-# Create directories
-mkdir -p .github/workflows
+on:
+  schedule:
+    # Runs every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    # Allow manual trigger from Actions tab
 
-# Create the workflow file
-cat > .github/workflows/update.yml << 'EOF'
-[paste YAML content here]
-EOF
-
-# Commit and push
-git add .github/workflows/update.yml
-git commit -m "Add M3U playlist auto-update workflow"
-git push
+jobs:
+  update-playlist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Fetch M3U playlist
+        run: |
+          curl -fsSL -o playlist.m3u "https://servertvhub.site/jiotv+/playlist.php" || wget -q -O playlist.m3u "https://servertvhub.site/jiotv+/playlist.php"
+        
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet playlist.m3u; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git add playlist.m3u
+          git commit -m "Auto-update: Fetch latest M3U playlist [$(date -u +'%Y-%m-%d %H:%M:%S UTC')]"
+          git push
