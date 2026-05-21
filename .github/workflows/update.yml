@@ -1,1 +1,16 @@
+# Clone your repo
+git clone https://github.com/sangamp94/notesofphysicsclass5.git
+cd notesofphysicsclass5
 
+# Create directories
+mkdir -p .github/workflows
+
+# Create the workflow file
+cat > .github/workflows/update.yml << 'EOF'
+[paste YAML content here]
+EOF
+
+# Commit and push
+git add .github/workflows/update.yml
+git commit -m "Add M3U playlist auto-update workflow"
+git push
