@@ -22,7 +22,7 @@ https://servertvhub.site/jiotv+/mpd.php?id=144
 #EXTINF:-1 tvg-id="146" tvg-name="History TV18 HD" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/History_HD.png" group-title="JioTv+ ENGLISH",History TV18 HD
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=e5105a616fb95ce48dbde4fe9d7960ad:272d2bcff8430174fdd5aaf6f93abb6b
+#KODIPROP:inputstream.adaptive.license_key=0172b8cd13ed59349a05aadc58ae11e0:e4ab7836617767a2a6e7aaae17fad2b6
 #EXT-X-DRM-ID: 146
 #EXT-X-LICENSE-URL: https://servertvhub.site/jiotv+/keys.php?id=146
 https://servertvhub.site/jiotv+/mpd.php?id=146
